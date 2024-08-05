@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Verdulería</title>
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4">Gestión de Verdulería</h1>
+
+      <div class="row mb-3">
+        <div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ingrese producto"
+            aria-label="Producto"
+            id="productoNombre"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-12 col-sm-6 col-md-3 mt-2">
+          <button
+            class="btn btn-primary w-100"
+            type="button"
+            onclick="startAdd()"
+          >
+            Agregar al Inicio
+          </button>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 mt-2">
+          <button
+            class="btn btn-secondary w-100"
+            type="button"
+            onclick="endAdd()"
+          >
+            Agregar al Final
+          </button>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 mt-2">
+          <button
+            class="btn btn-danger w-100"
+            type="button"
+            onclick="firstelementDel()"
+          >
+            Eliminar Primer Elemento
+          </button>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 mt-2">
+          <button
+            class="btn btn-warning w-100"
+            type="button"
+            onclick="lastElementDel()"
+          >
+            Eliminar Último Elemento
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Producto</th>
+            </tr>
+          </thead>
+          <tbody id="bodyTable">
+            <!-- Aquí se mostrarán los productos -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+      const frutas = [
+        "Manzana",
+        "Banana",
+        "Naranja",
+        "Fresa",
+        "Mango",
+        "Piña",
+        "Uva",
+        "Pera",
+        "Melón",
+        "Sandía",
+      ];
+      const lista = document.getElementById("bodyTable");
+      let nombreFruta = document.getElementById("productoNombre");
+      function actualizarTable() {
+        lista.innerHTML = "";
+        frutas.forEach((fruta) => {
+          lista.innerHTML += `<tr>
+              <td>${fruta}</td>
+              </tr>`;
+        });
+      }
+      actualizarTable();
+      function startAdd() {
+        let nombre = nombreFruta.value;
+        if (nombre !== "") {
+          frutas.unshift(nombre);
+          actualizarTable();
+        } else {
+          alert("Por favor ingrese un nombre de fruta");
+        }
+      }
+      function endAdd() {
+        let nombre = nombreFruta.value;
+        if (nombre !== "") {
+          frutas.push(nombre);
+          actualizarTable();
+        } else {
+          alert("Por favor ingrese un nombre de fruta");
+        }
+      }
+      function firstelementDel() {
+        if (frutas.length > 0) {
+          frutas.shift();
+          actualizarTable();
+        } else {
+          alert("No hay mas datos para eliminar");
+        }
+      }
+      function lastElementDel() {
+        if (frutas.length > 0) {
+          frutas.pop();
+          actualizarTable();
+        } else {
+          alert("No hay mas datos para eliminar");
+        }
+      }
+    </script>
+  </body>
+</html>
